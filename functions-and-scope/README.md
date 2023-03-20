@@ -1,4 +1,5 @@
 #Functions and Scope
+[Zoom Recording](https://youtu.be/01KEGPz0ut0)
 
 ##Topics
 
