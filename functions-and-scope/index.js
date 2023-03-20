@@ -102,8 +102,7 @@ const inventory = [
 
 // ✅ create a variable `highestPricedBook`
 
-let highestPriceBook;
-
+let highestPriceBook = inventory[0];
 // ✅ create a function `findHighestPricedBook` that finds that book and returns it
 
 function findHighestPricedBook() {
@@ -111,6 +110,7 @@ function findHighestPricedBook() {
   for (let i = 1; i < inventory.length; i++) {
     const highestPriceSoFar = highestPriceBook.price;
     const thisBook = inventory[i];
+
     if (thisBook.price > highestPriceSoFar) {
       highestPriceBook = thisBook; // reassign if book has higher price
     }
@@ -118,19 +118,35 @@ function findHighestPricedBook() {
   return highestPriceBook;
 }
 
+findHighestPricedBook();
+
 console.log("highestPriceBook", highestPriceBook);
 
 // What is the problem with storing highestPriceBook as a global variable here? What would happen if we added another book of a higher price?
 
-// 💡 Arrow functions vs regular functions
-
-// ✅ create an arrow function version of the formatPrice function
-
-// After Break
+// 💡 Arrow functions vs regular functions // ✅ create an arrow function version of the formatPrice function // After Break
 
 // 💡 Practice using callbacks for iteration
 
 // ✅ Create an array of the prices of all of the books
+
+const getPriceList = () => {
+  // const priceList = [];
+  // for (let i = 0; i < inventory.length; i++) {
+  //   priceList.push(inventory[i].price);
+  // }
+  inventory.forEach((book) => {
+    let p = document.createElement("p");
+    p.innerText = book.title;
+    document.body.append(p);
+  });
+
+  return inventory.map((book) => {
+    return book.title;
+  });
+};
+
+console.log(getPriceList());
 
 // ✅ Create an array of simplified book objects
 
@@ -138,3 +154,39 @@ console.log("highestPriceBook", highestPriceBook);
 // 'Eloquent JavaScript: A Modern Introduction to Programming by Marjin Haverbeke is on sale for $10.00'
 
 // 💡 When do I use forEach vs map?
+
+// function hello(first, last) {
+//   console.log(`hello ${first} ${last}`);
+// }
+
+// const hello = (first, last) => {
+//   console.log(`hello ${first} ${last}`);
+
+//   return 15;
+// };
+
+// hello("whatever", "asf");
+// hello("bob");
+// hello("morgan");
+// hello(10);
+// hello();
+
+function makeShow(showToDo) {
+  // make new file
+  // add intro to file
+  // output = showToDo()
+  // add output to file
+  // add outro to file
+  // save file
+}
+
+function soloShow() {}
+
+makeShow(() => {
+  // do guest show stuff
+  // return guest show output
+});
+makeShow(() => {
+  // do solo show stuff
+  // return solo show output
+});
