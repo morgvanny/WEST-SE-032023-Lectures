@@ -1,5 +1,5 @@
 #DOM Manipulation
-[Zoom Recording]()
+[Zoom Recording](https://youtu.be/JIynEtQE8yQ)
 
 ##Topics
 
