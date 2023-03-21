@@ -94,8 +94,80 @@ const inventory = [
   },
 ];
 
-inventory.forEach((book) => {
-  let p = document.createElement("p");
-  p.innerText = book.title;
-  document.body.append(p);
-});
+// inventory.forEach((book) => {
+//   let p = document.createElement("p");
+//   p.innerText = book.title;
+//   document.body.append(p);
+// });
+
+// console.log(inventory);
+
+const showBook = (book) => {
+  const bookDiv = document.createElement("div");
+  const title = document.createElement("h3");
+  title.textContent = book.title;
+
+  const authorP = document.createElement("p");
+  authorP.textContent = `By: ${book.author}`;
+
+  const bookImg = document.createElement("img");
+  bookImg.src = book.imageUrl;
+
+  bookDiv.className = "book";
+  bookDiv.append(title);
+  bookDiv.append(bookImg);
+
+  bookDiv.append(authorP);
+  booksDiv.append(bookDiv);
+};
+
+const booksDiv = document.querySelector("#books");
+
+inventory.forEach(showBook);
+
+const header = document.querySelector("#headerTitle");
+
+// console.log(header);
+
+// header.textContent = "Morgan's Technical Books";
+// header.style.color = "red";
+
+// const p = document.querySelector("p");
+
+// p.textContent = "Morgan's Technical Books";
+// p.style.color = "red";
+
+function changeText(element, newText, color) {
+  element.textContent = newText;
+  element.style.color = color;
+}
+
+changeText(header, "This is fun", "purple");
+
+// function updateNumber() {
+//   const numElement = document.querySelector(".magic-number");
+
+//   const numElementText = numElement.textContent;
+
+//   const num = parseInt(numElementText);
+
+//   const newNum = num + 5;
+
+//   // console.log(newNum);
+
+//   numElement.textContent = newNum;
+// }
+
+// const numElement = document.querySelector(".magic-number");
+// numElement.textContent = parseInt(numElement.textContent) + 5;
+
+// numElement.remove();
+
+// querySelector
+// querySelectorAll
+// remove
+// append
+// createElement
+// textContent
+
+// addEventListener
