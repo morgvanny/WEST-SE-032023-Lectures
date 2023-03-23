@@ -1,4 +1,4 @@
-const inventory = [
+let inventory = [
   {
     id: 1,
     title: "Eloquent JavaScript: A Modern Introduction to Programming",
@@ -104,6 +104,12 @@ const inventory = [
 
 const showBook = (book) => {
   const bookDiv = document.createElement("div");
+
+  const removeBook = (event) => {
+    // inventory = inventory.filter((b) => book.id !== b.id);
+    bookDiv.remove();
+  };
+
   const title = document.createElement("h3");
   title.textContent = book.title;
 
@@ -113,12 +119,46 @@ const showBook = (book) => {
   const bookImg = document.createElement("img");
   bookImg.src = book.imageUrl;
 
+  const deleteBtn = document.createElement("button");
+
+  deleteBtn.addEventListener("click", removeBook);
+
+  booksDiv.append(bookDiv);
+
+  deleteBtn.textContent = "delete";
   bookDiv.className = "book";
   bookDiv.append(title);
   bookDiv.append(bookImg);
-
   bookDiv.append(authorP);
-  booksDiv.append(bookDiv);
+
+  const reviewsh4 = document.createElement("h4");
+  reviewsh4.textContent = "Reviews";
+  bookDiv.append(reviewsh4);
+  const reviewsDiv = document.createElement("div");
+
+  book.reviews.forEach((r) => {
+    const rP = document.createElement("p");
+    rP.textContent = r.content;
+    reviewsDiv.append(rP);
+  });
+  bookDiv.append(reviewsDiv);
+
+  const reviewForm = document.createElement("form");
+  reviewForm.innerHTML = `
+  <label for="review">Review:</label>
+  <input name="review"/>
+  <input type="submit" value="Add Review"/>
+  `;
+  bookDiv.append(reviewForm);
+  bookDiv.append(deleteBtn);
+
+  reviewForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const rP = document.createElement("p");
+    rP.textContent = e.target.review.value;
+    reviewsDiv.append(rP);
+    e.target.reset();
+  });
 };
 
 const booksDiv = document.querySelector("#books");
@@ -171,3 +211,10 @@ changeText(header, "This is fun", "purple");
 // textContent
 
 // addEventListener
+const logClick = (e) => {
+  console.log(e);
+};
+
+const div = document.querySelector("#header");
+
+div.addEventListener("click", logClick);

@@ -1,5 +1,5 @@
 #DOM Events
-[Zoom Recording]()
+[Zoom Recording](https://youtu.be/K5WhnNf9pDI)
 
 ##Topics
 
