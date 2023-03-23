@@ -1,0 +1,19 @@
+div#header {
+  background-image: url("imgs/books.png");
+  height: 50%;
+  opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  color: aliceblue;
+  text-shadow: 2px 4px #252525;
+  font-family: Verdana;
+}
+
+.book {
+  padding: 50px;
+}
