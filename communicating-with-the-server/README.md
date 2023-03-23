@@ -1,5 +1,5 @@
 #Communicating With the Server
-[Zoom Recording]()
+[Zoom Recording](https://youtu.be/l-67IDrRMaI)
 
 ##Topics
 
@@ -76,3 +76,8 @@ fetch(url)
 .then(data => console.log(data))
 
 ```
+
+GET - reading data
+POST - sending new data to be saved
+PATCH - updating existing data
+DELETE - deleting data
