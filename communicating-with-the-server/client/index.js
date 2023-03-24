@@ -1,8 +1,8 @@
-const booksDiv = document.querySelector("#books");
+const booksUl = document.querySelector("#books");
 
 const showBook = (book) => {
-  const bookDiv = document.createElement("div");
-  bookDiv.className = "book";
+  const bookLi = document.createElement("li");
+  bookLi.className = "list-li";
 
   const title = document.createElement("h3");
   title.textContent = book.title;
@@ -13,7 +13,7 @@ const showBook = (book) => {
 
   const reviewsh4 = document.createElement("h4");
   reviewsh4.textContent = "Reviews";
-  bookDiv.append(reviewsh4);
+
   const reviewsDiv = document.createElement("div");
 
   book.reviews.forEach((r) => {
@@ -21,7 +21,7 @@ const showBook = (book) => {
     rP.textContent = r.content;
     reviewsDiv.append(rP);
   });
-  bookDiv.append(reviewsDiv);
+  bookLi.append(reviewsDiv);
 
   const reviewForm = document.createElement("form");
   reviewForm.innerHTML = `
@@ -41,12 +41,20 @@ const showBook = (book) => {
   deleteBtn.textContent = "delete";
   const removeBook = (event) => {
     // inventory = inventory.filter((b) => book.id !== b.id);
-    bookDiv.remove();
+    bookLi.remove();
   };
   deleteBtn.addEventListener("click", removeBook);
 
-  booksDiv.append(bookDiv);
-  bookDiv.append(title, bookImg, authorP, reviewsDiv, deleteBtn);
+  booksUl.append(bookLi);
+  bookLi.append(
+    title,
+    bookImg,
+    authorP,
+    reviewsh4,
+    reviewsDiv,
+    reviewForm,
+    deleteBtn
+  );
 };
 
 fetch("http://localhost:3000/books")
@@ -59,4 +67,4 @@ fetch("http://localhost:3000/books")
   .then((books) => {
     books.forEach(showBook);
   })
-  .catch((error) => console.log("request failed"));
+  .catch((error) => console.log(error));
