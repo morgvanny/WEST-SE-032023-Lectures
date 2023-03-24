@@ -1,6 +1,6 @@
 #Communicating With the Server
-[Zoom Recording](https://youtu.be/l-67IDrRMaI)
-
+[Part 1 Zoom Recording](https://youtu.be/l-67IDrRMaI)
+[Part 2 Zoom Recording]()
 ##Topics
 
 - request-response cycle

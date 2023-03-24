@@ -60,17 +60,3 @@ fetch("http://localhost:3000/books")
     books.forEach(showBook);
   })
   .catch((error) => console.log("request failed"));
-
-// async function init() {
-//   try {
-//     const response = await fetch("http://localhost:3000/books");
-//     const books = await response.json();
-//     books.forEach(showBook);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
-// init();
-
-console.log("this logs after the fetch starts");
