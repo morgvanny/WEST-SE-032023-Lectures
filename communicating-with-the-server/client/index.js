@@ -29,11 +29,19 @@ const showBook = (book) => {
   <input name="review"/>
   <input type="submit" value="Add Review"/>
   `;
+
   reviewForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const rP = document.createElement("p");
     rP.textContent = e.target.review.value;
     reviewsDiv.append(rP);
+    fetch(`http://localhost:3000/books/${book.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        reviews: [...book.reviews, { content: e.target.review.value }],
+      }),
+    });
     e.target.reset();
   });
 
@@ -41,6 +49,10 @@ const showBook = (book) => {
   deleteBtn.textContent = "delete";
   const removeBook = (event) => {
     // inventory = inventory.filter((b) => book.id !== b.id);
+    fetch(`http://localhost:3000/books/${book.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
     bookLi.remove();
   };
   deleteBtn.addEventListener("click", removeBook);
@@ -68,3 +80,47 @@ fetch("http://localhost:3000/books")
     books.forEach(showBook);
   })
   .catch((error) => console.log(error));
+
+const addBook = (e) => {
+  e.preventDefault();
+  const newBook = {
+    title: e.target.title.value,
+    author: e.target.author.value,
+    imageUrl: e.target.imageUrl.value,
+    reviews: [],
+  };
+
+  // showBook(newBook);
+  fetch("http://localhost:3000/books", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newBook),
+  })
+    .then((r) => r.json())
+    .then((data) => {
+      showBook(data);
+      e.target.reset();
+    });
+};
+
+document.querySelector("#newBook").addEventListener("submit", addBook);
+//  {
+
+//     "title": "Cracking the Coding Interview",
+//     "author": "Gayle Laakmann McDowell",
+//     "reviews": [
+//       {
+//         "userID": 99,
+//         "content":
+//           "One of the most helpful books for taking on the tech interview"
+//       },
+//       {
+//         "userID": 20,
+//         "content": "Great but I just wish it was in JavaScript instead of Java"
+//       }
+//     ],
+//     "imageUrl":
+//       "https://images-na.ssl-images-amazon.com/images/I/41oYsXjLvZL._SY344_BO1,204,203,200_.jpg"
+//   }
