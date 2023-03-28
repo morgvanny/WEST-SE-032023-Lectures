@@ -1,5 +1,5 @@
 #Communicating With An External API
-[Zoom Recording]()
+[Zoom Recording](https://youtu.be/uRGWxW5nyaY)
 
 ##Topics
 
