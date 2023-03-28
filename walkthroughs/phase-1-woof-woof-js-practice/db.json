@@ -39,7 +39,7 @@
     {
       "id": 7,
       "name": "Puddles",
-      "isGoodDog": true,
+      "isGoodDog": false,
       "image": "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_7.jpg"
     },
     {
