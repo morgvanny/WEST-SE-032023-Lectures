@@ -1,5 +1,7 @@
 # Phase 1 Mock Code Challenge: Ramen Rater
 
+[Zoom Recording](https://youtu.be/QIdLQXWPU-A)
+
 ## Learning Goals
 
 - Access information from an API using a GET request and use it to update the
