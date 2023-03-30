@@ -1,2 +1,2 @@
 #Lab Walkthroughs
-[Zoom Recording]()
+[Zoom Recording](https://www.youtube.com/watch?v=H-jB3qbCuh0)
