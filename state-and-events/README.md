@@ -1,5 +1,7 @@
 # State and Events
 
+[Zoom Recording](https://youtu.be/bLdGwSxyaVQ)
+
 ### SWBATs:
 
 - Explain the importance of state
