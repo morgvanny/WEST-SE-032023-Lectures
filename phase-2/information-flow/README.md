@@ -1,5 +1,7 @@
 # React Information Flow
 
+[Zoom Recording](https://youtu.be/Pt9NmlzvGrE)
+
 ## SWBATs:
 
 - Define the term “lifting state”

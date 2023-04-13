@@ -1,18 +1,9 @@
-import ProjectListItem from "./ProjectListItem";
 import { useState } from "react";
+import Example from "./Example";
+import ProjectListItem from "./ProjectListItem";
 
 const ProjectList = ({ projects }) => {
   const [searchQuery, setSearchQuery] = useState("");
-
-  const searchResults = projects.filter((project) => {
-    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
-  });
-
-  const projectListItems = searchResults.map((project) => (
-    <ProjectListItem key={project.id} {...project} />
-  ));
-
-  const handleOnChange = (e) => setSearchQuery(e.target.value);
 
   // Deliverable 3: Refactor the filter component out of
   // `ProjectList` and implement inverse data flow
@@ -36,10 +27,16 @@ const ProjectList = ({ projects }) => {
   // - Call the callback function from the onChange
   // event listener
 
+  const filteredProjects = projects
+    .filter((project) => {
+      return project.name.toLowerCase().includes(searchQuery.toLowerCase());
+    })
+    .map((project) => <ProjectListItem key={project.id} {...project} />);
+
   return (
     <section>
       <h2>Projects</h2>
-
+      <Example />
       <div className="filter">
         <button type="button">All</button>
         <button type="button">Phase 5</button>
@@ -48,9 +45,12 @@ const ProjectList = ({ projects }) => {
         <button type="button">Phase 2</button>
         <button type="button">Phase 1</button>
       </div>
-      <input type="text" placeholder="Search..." onChange={handleOnChange} />
-
-      <ul className="cards">{projectListItems}</ul>
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <ul className="cards">{filteredProjects}</ul>
     </section>
   );
 };
