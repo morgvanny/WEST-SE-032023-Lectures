@@ -19,12 +19,12 @@ const ProjectList = ({ projects }) => {
       <h2>Projects</h2>
       {/* <h1>Count: {count}</h1> */}
       <div className="filter">
-        <button>All</button>
-        <button>Phase 5</button>
-        <button>Phase 4</button>
-        <button>Phase 3</button>
-        <button>Phase 2</button>
-        <button>Phase 1</button>
+        <button type="button">All</button>
+        <button type="button">Phase 5</button>
+        <button type="button">Phase 4</button>
+        <button type="button">Phase 3</button>
+        <button type="button">Phase 2</button>
+        <button type="button">Phase 1</button>
       </div>
       <input type="text" placeholder="Search..." onChange={handleOnChange} />
 
