@@ -2,11 +2,11 @@
 
 ## SWBATs:
 
-- [ ] Explain what a side effect is
-- [ ] Observe how React manages side effects with the useEffect hook
-- [ ] Observe how to use the useEffect hook to fetch data on page load
-- [ ] Observe how to send a POST request via form
-- [ ] Review changing parent state
+- Explain what a side effect is
+- Observe how React manages side effects with the useEffect hook
+- Observe how to use the useEffect hook to fetch data on page load
+- Observe how to send a POST request via form
+- Review changing parent state
 
 ## Deliverables
 
@@ -26,7 +26,7 @@
 
 - Place a console.log() inside the `App` component as well as the `useEffect` method
 
-- Open up the devtools to observe when each phase of the component will occur 
+- Open up the devtools to observe when each phase of the component will occur
 
 #### 4. Demonstrate the unmounting and cleanup phase of a component through `useEffect`
 
