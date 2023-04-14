@@ -7,8 +7,21 @@ const App = () => {
   const [projects, setProjects] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(true);
 
+  const addNewProject = (project) => {
+    fetch("http://localhost:3000/projects", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(project),
+    })
+      .then((r) => r.json())
+      .then((p) => {
+        setProjects([...projects, p]);
+      });
+    // setProjects([...projects, project]);
+  };
+
   const handleClick = () => {
-    fetch("http://localhost:4000/projects")
+    fetch("http://localhost:3000/projects")
       .then((res) => res.json())
       .then((projects) => setProjects(projects));
   };
@@ -18,7 +31,7 @@ const App = () => {
   return (
     <div className={isDarkMode ? "App" : "App light"}>
       <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
-      <ProjectForm />
+      <ProjectForm addNewProject={addNewProject} />
       <button onClick={handleClick}>Load Projects</button>
       <ProjectList projects={projects} />
     </div>
