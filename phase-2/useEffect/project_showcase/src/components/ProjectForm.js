@@ -26,7 +26,7 @@ const ProjectForm = ({ addNewProject }) => {
     // `POST` fetch request
 
     addNewProject(newProject);
-    setFormData(initialFormValues);
+    setNewProject(initialFormValues);
   };
 
   const { name, about, phase, link, image } = newProject;

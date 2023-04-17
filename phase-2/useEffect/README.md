@@ -1,5 +1,7 @@
 # Side Effects and Data Fetching
 
+[Zoom Recording](https://youtu.be/lj5CMsBcz40)
+
 ## SWBATs:
 
 - Explain what a side effect is
