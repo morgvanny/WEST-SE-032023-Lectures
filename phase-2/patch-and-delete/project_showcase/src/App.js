@@ -10,6 +10,50 @@ const App = () => {
   const [projects, setProjects] = useState([]);
   const [projectId, setProjectId] = useState(null);
 
+  const deleteProject = (id) => {
+    fetch(`http://localhost:4000/projects/${id}`, {
+      method: "DELETE",
+    });
+    setProjects(
+      projects.filter((project) => {
+        return project.id !== id;
+      })
+    );
+  };
+
+  const addClap = (id) => {
+    const currentClapCount = projects.find(
+      (project) => project.id === id
+    ).clapCount;
+
+    fetch(`http://localhost:4000/projects/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ clapCount: currentClapCount + 1 }),
+    });
+    setProjects(
+      projects.map((project) => {
+        if (project.id === id) {
+          return { ...project, clapCount: currentClapCount + 1 };
+        } else {
+          return project;
+        }
+      })
+    );
+  };
+
+  const editProject = (updatedProject) => {
+    setProjects(
+      projects.map((project) => {
+        if (project.id === updatedProject.id) {
+          return updatedProject;
+        } else {
+          return project;
+        }
+      })
+    );
+  };
+
   const selectedProject = projects.find((p) => p.id === projectId);
 
   useEffect(() => {
@@ -38,6 +82,7 @@ const App = () => {
     <ProjectEditForm
       key={projectId}
       project={selectedProject}
+      editProject={editProject}
       completeEditing={completeEditing}
     />
   ) : (
@@ -49,6 +94,8 @@ const App = () => {
       <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
       {renderForm}
       <ProjectList
+        deleteProject={deleteProject}
+        addClap={addClap}
         projects={projects}
         enterProjectEditModeFor={enterProjectEditModeFor}
       />

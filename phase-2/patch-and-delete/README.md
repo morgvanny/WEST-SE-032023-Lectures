@@ -1,5 +1,7 @@
 # PATCH & DELETE requests
 
+[Zoom Recording](https://youtu.be/cDkSk7I-OWQ)
+
 ## SWBATs:
 
 - [ ] Observe how to send a PATCH & DELETE request

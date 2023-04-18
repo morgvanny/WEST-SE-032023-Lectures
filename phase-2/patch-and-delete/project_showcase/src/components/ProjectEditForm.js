@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ProjectEditForm = ({ project, completeEditing }) => {
+const ProjectEditForm = ({ project, completeEditing, editProject }) => {
   const [formData, setFormData] = useState(project);
 
   const { name, about, phase, link, image } = formData;
@@ -12,8 +12,14 @@ const ProjectEditForm = ({ project, completeEditing }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    fetch(`http://localhost:4000/projects/${formData.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    })
+      .then((r) => r.json())
+      .then((data) => editProject(data));
 
-    // Add code here
     completeEditing();
   }
 
