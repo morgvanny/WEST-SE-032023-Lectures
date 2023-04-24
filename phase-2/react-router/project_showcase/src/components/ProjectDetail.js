@@ -3,11 +3,13 @@
 
 import { useEffect, useState } from "react";
 
+import { useParams } from "react-router-dom";
+
 const ProjectDetail = () => {
   const [claps, setClaps] = useState(0);
   const [project, setProject] = useState(null);
 
-  const id = 1;
+  const { id } = useParams();
 
   useEffect(() => {
     fetch(`http://localhost:4000/projects/${id}`)
@@ -16,6 +18,10 @@ const ProjectDetail = () => {
         setProject(project);
       });
   }, [id]);
+
+  if (!project) {
+    return <div>Loading...</div>;
+  }
 
   const { image, name, about, link, phase } = project;
 
