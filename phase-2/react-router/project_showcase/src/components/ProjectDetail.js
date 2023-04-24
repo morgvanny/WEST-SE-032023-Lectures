@@ -21,7 +21,7 @@ const ProjectDetail = () => {
 
   const handleClapClick = () => {
     setClaps((claps) => claps + 1);
-  }
+  };
 
   return (
     <section>
