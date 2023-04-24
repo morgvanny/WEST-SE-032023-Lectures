@@ -68,7 +68,7 @@ const App = () => {
       <ProjectList projects={projects} onDeleteProject={onDeleteProject} />
       <ProjectEditForm onUpdateProject={onUpdateProject} />
       <ProjectForm onAddProject={onAddProject} />
-      <ProjectDetail />
+      {/* <ProjectDetail /> */}
     </div>
   );
 };
