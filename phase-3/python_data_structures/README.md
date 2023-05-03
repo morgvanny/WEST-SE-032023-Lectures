@@ -1,5 +1,8 @@
 # Python Data Structures
 
+[Zoom Recording Part 1](https://www.youtube.com/watch?v=COykIOK9BXk)
+[Zoom Recording Part 2](https://www.youtube.com/watch?v=F_RADQD18L4)
+
 ## Learning Goals
 
 - Demonstrate Sequence types (`list`, `tuple`, `range`)
