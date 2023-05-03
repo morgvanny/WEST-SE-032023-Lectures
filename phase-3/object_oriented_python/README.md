@@ -1,15 +1,17 @@
 # Object Oriented Programming in Python
 
+[Zoom Recording](https://youtu.be/q1EbxBv3G3g)
+
 ## Learning Goals
 
 - Define Object Oriented Programming
 - Explain the benefits of Object Oriented Programming
 - Explain the principles of Object-Oriented Design
-- Demonstrate Classes 
-- Demonstrate Instances 
+- Demonstrate Classes
+- Demonstrate Instances
 - Demonstrate `__init__`
 - Demonstrate instance method
-- Demonstrate the `self` keyword 
+- Demonstrate the `self` keyword
 - Stretch Goals
-    - Demonstrate object properties
-    - Demonstrate mass assignment during Class instantiation
+  - Demonstrate object properties
+  - Demonstrate mass assignment during Class instantiation
