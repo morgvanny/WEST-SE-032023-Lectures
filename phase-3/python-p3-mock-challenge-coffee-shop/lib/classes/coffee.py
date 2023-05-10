@@ -1,17 +1,23 @@
+from statistics import mean
+
+
 class Coffee:
     def __init__(self, name):
-        self.name = name
-        
-    def orders(self, new_order=None):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    def orders(self):
         from classes.order import Order
-        pass
-    
-    def customers(self, new_customer=None):
-        from classes.customer import Customer
-        pass
-    
+        return [o for o in Order.all if o.coffee == self]
+
+    def customers(self):
+        return list(set([o.customer for o in self.orders()]))
+
     def num_orders(self):
-        pass
-    
+        return len(self.orders())
+
     def average_price(self):
-        pass
+        return mean([o.price for o in self.orders()])
