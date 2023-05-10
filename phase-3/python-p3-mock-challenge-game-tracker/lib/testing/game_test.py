@@ -4,6 +4,7 @@ from classes.player import Player
 from classes.game import Game
 from classes.result import Result
 
+
 class TestGame:
     '''Game in game.py'''
 
@@ -22,15 +23,15 @@ class TestGame:
         game = Game("Skribbl.io")
         assert (hasattr(game, "title"))
 
-        # with pytest.raises(Exception):
-        #     Game("")
+        with pytest.raises(Exception):
+            Game("")
 
     def test_title_setter(self):
         '''Cannot change the title of the game'''
         game = Game("Skribbl.io")
-        
-        # with pytest.raises(Exception):
-        #     game.title = "not Skribbl.io"
+
+        with pytest.raises(Exception):
+            game.title = "not Skribbl.io"
 
     def test_has_many_results(self):
         '''Game has many results.'''

@@ -4,6 +4,7 @@ from classes.player import Player
 from classes.game import Game
 from classes.result import Result
 
+
 class TestPlayer:
     '''Player in player.py'''
 
@@ -22,11 +23,11 @@ class TestPlayer:
         player = Player("Saaammmm")
         assert (hasattr(player, "username"))
 
-        # with pytest.raises(Exception):
-        #     Player("y")
+        with pytest.raises(Exception):
+            Player("y")
 
-        # with pytest.raises(Exception):
-        #     Player("this_username_is_too_long")
+        with pytest.raises(Exception):
+            Player("this_username_is_too_long")
 
     def test_username_setter(self):
         '''Can change the player's username'''
@@ -116,14 +117,14 @@ class TestPlayer:
         assert (player_2.num_times_played(game) == 0)
         assert (player_2.num_times_played(game_2) == 1)
 
-    # def test_highest_score(self):
-    #     '''which player has the highest average score for a given game'''
-    #     game = Game("Skribbl.io")
-    #     player = Player('Saaammmm')
-    #     player_2 = Player('ActuallyTopher')
-    #     Result(player, game, 2000)
-    #     Result(player, game, 19)
-    #     Result(player, game, 1900)
-    #     Result(player_2, game, 9)
+    def test_highest_score(self):
+        '''which player has the highest average score for a given game'''
+        game = Game("Skribbl.io")
+        player = Player('Saaammmm')
+        player_2 = Player('ActuallyTopher')
+        Result(player, game, 2000)
+        Result(player, game, 19)
+        Result(player, game, 1900)
+        Result(player_2, game, 9)
 
-    #     assert Player.highest_scored(game) == player
+        assert Player.highest_scored(game) == player

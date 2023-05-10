@@ -1,16 +1,28 @@
+from statistics import mean
+
+
 class Game:
     def __init__(self, title):
-        self.title = title
-        self._results = []
-        self._players = []
-        
-    def results(self, new_result=None):
+        if isinstance(title, str) and title:
+            self._title = title
+        else:
+            raise Exception(
+                "Title must be a string with more than 0 characters.")
+
+    @property
+    def title(self):
+        return self._title
+
+    def results(self):
         from classes.result import Result
-        pass
-    
-    def players(self, new_player=None):
-        from classes.player import Player
-        pass
-    
+        return [r for r in Result.all if r.game == self]
+
+    def players(self):
+        return list(set([r.player for r in self.results()]))
+
     def average_score(self, player):
-        pass
+        scores = [r.score for r in self.results() if r.player == player]
+        if len(scores) > 0:
+            return mean(scores)
+        else:
+            return 0
