@@ -4,6 +4,7 @@ from classes.coffee import Coffee
 from classes.customer import Customer
 from classes.order import Order
 
+
 class TestCustomer:
     '''Customer in customer.py'''
 
@@ -23,19 +24,19 @@ class TestCustomer:
         customer = Customer('Steve')
         assert (isinstance(customer.name, str))
 
-        # with pytest.raises(Exception):
-        #     customer.name = 1
+        with pytest.raises(Exception):
+            customer.name = 1
 
     def test_customer_name_length(self):
         '''customer name is between 1 and 15 characters'''
         customer = Customer('Steve')
         assert (len(customer.name) == 5)
 
-        # with pytest.raises(Exception):
-        #     customer.name = "NameLongerThan15Characters"
+        with pytest.raises(Exception):
+            customer.name = "NameLongerThan15Characters"
 
-        # with pytest.raises(Exception):
-        #     customer.name = ""
+        with pytest.raises(Exception):
+            customer.name = ""
 
     def test_has_many_orders(self):
         '''customer has many orders'''

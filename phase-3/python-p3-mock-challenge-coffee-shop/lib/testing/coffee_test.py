@@ -4,6 +4,7 @@ from classes.coffee import Coffee
 from classes.customer import Customer
 from classes.order import Order
 
+
 class TestCoffee:
     '''Coffee in coffee.py'''
 
@@ -21,8 +22,8 @@ class TestCoffee:
         '''Cannot change the name of the coffee'''
         coffee = Coffee("Mocha")
 
-        # with pytest.raises(Exception):
-        #     coffee.name = "Peppermint Mocha"
+        with pytest.raises(Exception):
+            coffee.name = "Peppermint Mocha"
 
     def test_has_many_orders(self):
         '''coffee has many orders.'''
