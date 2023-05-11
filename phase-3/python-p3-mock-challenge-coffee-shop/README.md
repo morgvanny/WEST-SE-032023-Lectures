@@ -1,5 +1,7 @@
 # Mock Code Challenge - Coffee Shop (Object Relationships)
 
+[Zoom Recording](https://youtu.be/tSijSM_9gvk)
+
 For this assignment, we'll be working with a Coffee shop-style domain.
 
 We have three models: `Coffee`, `Customer`, and `Order`.

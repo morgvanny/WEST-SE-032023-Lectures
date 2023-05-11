@@ -1,5 +1,7 @@
 # Mock Code Challenge - National Parks (Object Relationships)
 
+[Zoom Recording](https://youtu.be/C6MN1WYvmbc)
+
 For this assignment, we'll be working with a national park planner-style domain.
 
 We have three models: `NationalPark`, `Visitor`, and `Trip`.
@@ -102,7 +104,7 @@ build out any helper methods if needed.
   - The list of trips must contain type `Trip`
 - `Visitor national_parks()`
   - Returns a **unique** list of all parks who that visitor has visited.
-  - The list of national parks must contain type `NationalPark` 
+  - The list of national parks must contain type `NationalPark`
 
 #### NationalPark
 

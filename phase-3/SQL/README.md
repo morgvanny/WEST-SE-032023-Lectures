@@ -1,5 +1,7 @@
 # SQL Fundamentals & Table Relations
 
+[Zoom Recording](https://youtu.be/xX-ANgHb4V4)
+
 ## Learning Goals
 
 - Explain why we use databases
