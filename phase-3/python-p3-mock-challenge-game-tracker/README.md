@@ -1,5 +1,8 @@
 # Mock Code Challenge - Game Tracker (Object Relationships)
 
+[Zoom Recording pt 1](https://youtu.be/OAcdbBaAnA0)
+[Zoom Recording p2 2](https://youtu.be/p2Zp9kYxX6I)
+
 For this assignment, we'll be working with a game tracking domain.
 
 We have three models: `Game`, `Player`, and `Result`.
@@ -95,7 +98,7 @@ build out any helper methods if needed.
   - Returns the score for the `Result` instance
   - Scores must be integers between 1 and 5000, inclusive
     - If you are using exceptions, uncomment lines 20-30 in
-    `testing/result_test.py`.
+      `testing/result_test.py`.
     - `raise Exception` if setter fails
 
 ### Object Relationship Attributes and Properties
