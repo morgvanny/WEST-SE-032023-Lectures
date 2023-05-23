@@ -10,3 +10,10 @@ db = SQLAlchemy()
 # Columns:
 # title: string, genre: string, budget:float, image:string,director: string, description:string, ongoing:boolean, created_at:date time, updated_at: date time
 # 2. ✅ navigate to app.py
+
+
+class Production(db.Model):
+    __tablename__ = 'productions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
