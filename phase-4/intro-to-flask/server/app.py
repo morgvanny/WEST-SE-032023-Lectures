@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 from flask import Flask, jsonify, make_response, request
-# from flask_migrate import Migrate
-# from models import db, Production
+from flask_migrate import Migrate
+from models import db, Production
 # 📚 Review With Students:
 # Request-Response Cycle
 # Web Servers and WSGI/Werkzeug
@@ -15,12 +15,12 @@ from flask import Flask, jsonify, make_response, request
 # 3. ✅ Initialize the App
 app = Flask(__name__)
 # Configure the database
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
-# db.init_app(app)
+db.init_app(app)
 
 # 4. ✅ Migrate
 
@@ -55,6 +55,29 @@ def fake_production():
 
     return response
 
+
+@app.route('/productions')
+def productions():
+    production_response = [{"id": production.id, "title": production.title,
+                            "genre": production.director, "director": production.director,
+                            "description": production.description,
+                            "budget": production.budget, "image": production.image,
+                            "ongoing": production.ongoing, "created_at": production.created_at,
+                            "updated_at": production.updated_at} for production in Production.query.all()]
+    response = make_response(jsonify(production_response), 200)
+    return response
+
+
+@app.route('/productions/<string:id>')
+def production(id):
+    production = Production.query.filter(Production.id == id).first()
+    production_response = {"id": production.id, "title": production.title,
+                           "genre": production.director, "director": production.director,
+                           "description": production.description,
+                           "budget": production.budget, "image": production.image,
+                           "ongoing": production.ongoing, "created_at": production.created_at,
+                           "updated_at": production.updated_at}
+    return make_response(jsonify(production_response), 200)
 
 # Note: If you'd like to run the application as a script instead of using `flask run`, uncomment the line below
 # and run `python app.py`
