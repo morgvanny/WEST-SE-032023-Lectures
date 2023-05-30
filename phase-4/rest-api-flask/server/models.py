@@ -1,9 +1,9 @@
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
 # 6. ✅ Import `SerializerMixin` from `sqlalchemy_serializer`
 from sqlalchemy_serializer import SerializerMixin
 db = SQLAlchemy()
-
 # 7. ✅ Pass `SerializerMixin` to `Productions`
 
 
@@ -22,11 +22,27 @@ class Production(db.Model, SerializerMixin):
     updated_at = db.Column(
         db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
-    cast_members = db.relationship('CastMember', backref='production')
+    cast_members = db.relationship(
+        'CastMember', backref='production', cascade="all, delete-orphan")
+
+    @validates('image')
+    def validates_image_ends_with_jpg(self, key, image):
+        if not image.endswith('.jpg'):
+            raise ValueError("Image must end with .jpg")
+        return image
+
+    def url(self):
+        # from app import api
+
+        # return api.url_for('ProductionResource', id=self.id, _external=True)
+        return f'http://127.0.0.1:5000/productions/{self.id}'
+
+    def formatted_budget(self):
+        return "${:,.2f}".format(self.budget)
 
     # 7.1 ✅ Create a serialize rule that will help add our `cast_members` to the response.
     serialize_rules = ('-cast_members.production',
-                       '-created_at', '-updated_at')
+                       '-created_at', '-updated_at', '-budget', 'formatted_budget')
 
     def __repr__(self):
         return f'<Production Title:{self.title}, Genre:{self.genre}, Budget:{self.budget}, Image:{self.image}, Director:{self.director},ongoing:{self.ongoing}>'

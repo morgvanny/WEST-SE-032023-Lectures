@@ -1,6 +1,5 @@
 # SQLAlchemy import
 from flask_sqlalchemy import SQLAlchemy
-
 # 📚 Review With Students:
 # What SQLAlchemy() is replacing from SQLAlchemy in phase 3
 
@@ -25,6 +24,20 @@ class Production(db.Model):
     ongoing = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'genre': self.genre,
+            'director': self.director,
+            'description': self.description,
+            'image': self.image,
+            'budget': self.budget,
+            'ongoing': self.ongoing,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat()
+        }
 
     def __repr__(self):
         return f"< ID: {self.id}, Title: {self.title}, Created at: {self.created_at}, Updated at:{self.updated_at} >"

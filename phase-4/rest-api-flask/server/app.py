@@ -26,11 +26,12 @@
 # | PATCH/PUT 	| /productions/:id 	| UPDATE one resource	|
 # | DELETE    	| /productions/:id 	| DESTROY one resource 	|
 
-from flask import Flask, request, make_response, jsonify
+from flask import Flask, request, make_response, jsonify, abort
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 # 1. ✅ Import `Api` and `Resource` from `flask_restful`
 # ❓ What do these two classes do at a higher level?
+
 
 from models import db, Production, CastMember
 
@@ -51,22 +52,27 @@ api = Api(app)
 
 class Productions(Resource):
     def get(self):
-        production_response = [production.to_dict()
+        production_response = [production.to_dict(only=('id', 'title', 'url'))
                                for production in Production.query.all()]
         response = make_response(jsonify(production_response), 200)
         return response
 
     def post(self):
         request_json = request.get_json()
-        new_prod = Production(
-            title=request_json["title"],
-            genre=request_json["genre"],
-            image=request_json["image"],
-            budget=request_json["budget"],
-            director=request_json["director"],
-            description=request_json["description"],
-            ongoing=request_json["ongoing"],
-        )
+
+        try:
+            new_prod = Production(
+                title=request_json["title"],
+                genre=request_json["genre"],
+                image=request_json["image"],
+                budget=request_json["budget"],
+                director=request_json["director"],
+                description=request_json["description"],
+                ongoing=request_json["ongoing"],
+            )
+        except ValueError as e:
+            return make_response(jsonify({"errors": e.args}), 422)
+
         db.session.add(new_prod)
         db.session.commit()
         response_dict = new_prod.to_dict()
@@ -80,10 +86,36 @@ api.add_resource(Productions, '/productions')
 class ProductionById(Resource):
     def get(self, id):
         production = Production.query.get(id)
-        if production:
-            return make_response(jsonify(production.to_dict()), 200)
-        else:
+        if not production:
+            # abort(404, jsonify({'error': 'Production not found'}))
             return make_response(jsonify({'error': 'Production not found'}), 404)
+        return make_response(jsonify(production.to_dict()), 200)
+
+    def patch(self, id):
+        request_json = request.get_json()
+        production = Production.query.get(id)
+        if not production:
+            return make_response(jsonify({'error': "Can't update a production that doesn't exist!"}), 404)
+        try:
+            for key in request_json:
+                setattr(production, key, request_json[key])
+        except ValueError as e:
+            return make_response(jsonify({"errors": e.args}), 422)
+
+        db.session.add(production)
+        db.session.commit()
+
+        response = make_response(production.to_dict(), 200)
+        return response
+
+    def delete(self, id):
+        production = Production.query.get(id)
+        if not production:
+            return make_response(jsonify({'error': "Can't delete a production that doesn't exist!"}), 404)
+        db.session.delete(production)
+        db.session.commit()
+
+        return make_response('', 204)
 
 
 api.add_resource(ProductionById, '/productions/<int:id>')
@@ -108,6 +140,15 @@ class CastMemberById(Resource):
             return response
         else:
             return make_response(jsonify({'error': 'Cast member not found'}), 404)
+
+    def delete(self, id):
+        cast_member = CastMember.query.get(id)
+        if not cast_member:
+            return make_response(jsonify({"error": "Can't delete cast members that don't exist!"}))
+        db.session.delete(cast_member)
+        db.session.commit()
+
+        return make_response("", 204)
 
 
 api.add_resource(CastMemberById, '/cast_members/<int:id>')

@@ -58,25 +58,18 @@ def fake_production():
 
 @app.route('/productions')
 def productions():
-    production_response = [{"id": production.id, "title": production.title,
-                            "genre": production.director, "director": production.director,
-                            "description": production.description,
-                            "budget": production.budget, "image": production.image,
-                            "ongoing": production.ongoing, "created_at": production.created_at,
-                            "updated_at": production.updated_at} for production in Production.query.all()]
+    production_response = [production.to_dict()
+                           for production in Production.query.all()]
     response = make_response(jsonify(production_response), 200)
     return response
 
 
-@app.route('/productions/<string:id>')
+@app.route('/productions/<int:id>')
 def production(id):
-    production = Production.query.filter(Production.id == id).first()
-    production_response = {"id": production.id, "title": production.title,
-                           "genre": production.director, "director": production.director,
-                           "description": production.description,
-                           "budget": production.budget, "image": production.image,
-                           "ongoing": production.ongoing, "created_at": production.created_at,
-                           "updated_at": production.updated_at}
+    production = Production.query.get(id)
+    if production is None:
+        return jsonify({'error': 'Production not found'}), 404
+    production_response = production.to_dict()
     return make_response(jsonify(production_response), 200)
 
 # Note: If you'd like to run the application as a script instead of using `flask run`, uncomment the line below
