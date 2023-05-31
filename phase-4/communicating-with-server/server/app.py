@@ -29,6 +29,7 @@
 from flask import Flask, request, make_response, jsonify, abort
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
+from flask_cors import CORS
 # 1. ✅ Import `Api` and `Resource` from `flask_restful`
 # ❓ What do these two classes do at a higher level?
 
@@ -36,6 +37,7 @@ from flask_restful import Api, Resource
 from models import db, Production, CastMember
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Note: `app.json.compact = False` configures JSON responses to print on indented lines
@@ -52,23 +54,22 @@ api = Api(app)
 
 class Productions(Resource):
     def get(self):
-        production_response = [production.to_dict(only=('id', 'title', 'url'))
+        production_response = [production.to_dict()
                                for production in Production.query.all()]
         response = make_response(jsonify(production_response), 200)
         return response
 
     def post(self):
         request_json = request.get_json()
-
         try:
             new_prod = Production(
-                title=request_json["title"],
+                title=request_json.get("title"),
                 genre=request_json["genre"],
                 image=request_json["image"],
                 budget=request_json["budget"],
                 director=request_json["director"],
                 description=request_json["description"],
-                ongoing=request_json["ongoing"],
+                ongoing=True,
             )
         except ValueError as e:
             return make_response(jsonify({"errors": e.args}), 422)

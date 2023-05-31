@@ -31,6 +31,14 @@ class Production(db.Model, SerializerMixin):
             raise ValueError("Image must end with .jpg")
         return image
 
+    @validates('budget')
+    def validates_budget_over_100(self, key, budget):
+        budget = 0 if not budget else budget
+        budget = float(budget)
+        if not budget > 100:
+            raise ValueError("Budget must be over $100")
+        return budget
+
     def url(self):
         # from app import api
 
@@ -42,7 +50,7 @@ class Production(db.Model, SerializerMixin):
 
     # 7.1 ✅ Create a serialize rule that will help add our `cast_members` to the response.
     serialize_rules = ('-cast_members.production',
-                       '-created_at', '-updated_at', '-budget', 'formatted_budget')
+                       '-created_at', '-updated_at', 'formatted_budget')
 
     def __repr__(self):
         return f'<Production Title:{self.title}, Genre:{self.genre}, Budget:{self.budget}, Image:{self.image}, Director:{self.director},ongoing:{self.ongoing}>'
